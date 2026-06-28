@@ -664,7 +664,7 @@ function renderTaskLogGrid() {
                     class="btn btn-primary"
                     onclick="editTaskLog('${item.task_log_id}')">
 
-                    Edit
+                    &#9999;&#65039;
 
                 </button>
 
@@ -672,7 +672,7 @@ function renderTaskLogGrid() {
                     class="btn btn-danger"
                     onclick="deleteTaskLog('${item.task_log_id}')">
 
-                    Delete
+                    &#128465;&#65039;
 
                 </button>
 

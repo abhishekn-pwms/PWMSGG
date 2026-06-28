@@ -365,7 +365,7 @@ function renderActivityGrid() {
                         class="btn btn-primary"
                         onclick="editActivity('${item.activity_id}')">
 
-                        Edit
+                        &#9999;&#65039;
 
                     </button>
 
@@ -373,7 +373,7 @@ function renderActivityGrid() {
                         class="btn btn-danger"
                         onclick="disableActivity('${item.activity_id}')">
 
-                        Disable
+                        &#128683;
 
                     </button>
 
@@ -387,7 +387,7 @@ function renderActivityGrid() {
                         class="btn btn-primary"
                         onclick="enableActivity('${item.activity_id}')">
 
-                        Enable
+                        &#9989;
 
                     </button>
 

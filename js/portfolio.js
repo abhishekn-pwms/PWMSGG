@@ -204,7 +204,7 @@ document.getElementById(
                         class="btn btn-primary"
                         onclick="editPortfolio('${item.portfolio_id}')">
 
-                        Edit
+                        &#9999;&#65039;
 
                     </button>
 
@@ -212,7 +212,7 @@ document.getElementById(
                         class="btn btn-danger"
                         onclick="disablePortfolio('${item.portfolio_id}')">
 
-                        Disable
+                        &#128683;
 
                     </button>
 
@@ -224,7 +224,7 @@ document.getElementById(
                         class="btn btn-primary"
                         onclick="enablePortfolio('${item.portfolio_id}')">
 
-                        Enable
+                        &#9989;
 
                     </button>
 

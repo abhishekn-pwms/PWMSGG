@@ -291,7 +291,7 @@ function renderMilestoneGrid() {
                         class="btn btn-primary"
                         onclick="editMilestone('${item.milestone_id}')">
 
-                        Edit
+                        &#9999;&#65039;
 
                     </button>
 
@@ -299,7 +299,7 @@ function renderMilestoneGrid() {
                         class="btn btn-danger"
                         onclick="disableMilestone('${item.milestone_id}')">
 
-                        Disable
+                        &#128683;
 
                     </button>
 
@@ -311,7 +311,7 @@ function renderMilestoneGrid() {
                         class="btn btn-primary"
                         onclick="enableMilestone('${item.milestone_id}')">
 
-                        Enable
+                        &#9989;
 
                     </button>
 

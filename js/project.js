@@ -288,7 +288,7 @@ return (
                         class="btn btn-primary"
                         onclick="editProject('${item.project_id}')">
 
-                        Edit
+                        &#9999;&#65039;
 
                     </button>
 
@@ -296,7 +296,7 @@ return (
                         class="btn btn-danger"
                         onclick="disableProject('${item.project_id}')">
 
-                        Disable
+                        &#128683;
 
                     </button>
 
@@ -308,7 +308,7 @@ return (
                         class="btn btn-primary"
                         onclick="enableProject('${item.project_id}')">
 
-                        Enable
+                        &#9989;
 
                     </button>
 
