@@ -241,7 +241,7 @@ function renderMilestoneGrid() {
             </td>
 
             <td>
-                <font style="font-size:20px;font-weight:bold;">
+                <font style="font-weight:bold;">
                 ${item.milestone_name}
                 </font>
             </td>

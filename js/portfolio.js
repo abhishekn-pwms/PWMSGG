@@ -169,7 +169,7 @@ document.getElementById(
         <tr>
 
             <td>
-                <font style="font-size:20px;font-weight:bold;">
+                <font style="font-weight:bold;">
                 ${item.portfolio_name}
                 </font>
             </td>
