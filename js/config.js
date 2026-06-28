@@ -5,9 +5,16 @@ const APP_BASE = (() => {
 
     if (
         window.location.hostname ===
-        "abhishekn-pwms.github.io"
+        "abhishekn-pwms.github.io/PWMS2"
     ) {
         return "/PWMS2";
+    }
+
+    elseif (
+        window.location.hostname ===
+        "abhishekn-pwms.github.io/PWMSGG"
+    ) {
+        return "/PWMSGG";
     }
 
     return "";
@@ -82,7 +89,7 @@ function getDefaultLandingPage() {
 
 const APP_CONFIG = {
 
-    APP_NAME: "PWMS 2",
+    APP_NAME: "PWMS GG",
 
     VERSION: "2.0",
 
