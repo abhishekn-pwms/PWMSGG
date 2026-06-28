@@ -1,524 +1,173 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
-    <title>
-        Task Log 1.4UI
-    </title>
-
-    <link
-        rel="stylesheet"
-        href="../css/pwms.css">
-
+    <title>Task Log GG V1</title>
+    <link rel="stylesheet" href="../css/pwms.css">
 </head>
-
 <body>
 
     <div class="app-layout">
 
         <div id="header"></div>
 
-        <div id="sidebar"></div>
+        <div class="app-body-container">
 
-        <div id="content">
+            <div id="sidebar"></div>
 
-            <div class="page-header">
+            <div id="content">
 
-                <div class="page-title">
-                    Task Log --> v1.4UI Mobile CSS Foundation Framework & Text Sizes
+                <div class="page-header">
+                    <div class="page-title">
+                        Task Log GG v1
+                    </div>
+                    <button class="btn btn-primary" onclick="newTaskLog()">
+                        + New Task Log
+                    </button>
                 </div>
 
-                <button
-                    class="btn btn-primary"
-                    onclick="newTaskLog()">
-
-                    + New Task Log
-
-                </button>
-
-            </div>
-
-            <div class="toolbar">
-
-                <input
-                    type="search"
-                    id="searchText"
-                    class="search-box"
-                    placeholder="Search Task Description..."
-                    onkeyup="refreshTaskLogView()">
-
-                <select
-                    id="periodFilter"
-                    onchange="applyPeriodFilter()">
-
-                    <option value="Today">
-                        Today
-                    </option>
-
-                    <option value="This Week">
-                        This Week
-                    </option>
-
-                    <option value="This Month">
-                        This Month
-                    </option>
-
-                    <option value="All">
-                        All
-                    </option>
-
-                </select>
-
-                <input
-                    type="date"
-                    id="fromDate"
-                    onchange="refreshTaskLogView()">
-
-                <input
-                    type="date"
-                    id="toDate"
-                    onchange="refreshTaskLogView()">
-
-                <select
-                    id="activityStatusFilter"
-                    onchange="refreshTaskLogView()">
-
-                </select>
-
-            </div>
-
-            <div
-                style="
-                    margin-bottom:10px;
-                    display:flex;
-                    gap:20px;
-                    font-size:14px;
-                    font-weight:bold;">
-
-                <div id="totalRecords">
-                    Total Records: 0
+                <div class="toolbar">
+                    <input type="search" id="searchText" class="search-box" placeholder="Search Task Description..." onkeyup="refreshTaskLogView()">
+                    <select id="periodFilter" onchange="applyPeriodFilter()">
+                        <option value="Today">Today</option>
+                        <option value="This Week">This Week</option>
+                        <option value="This Month">This Month</option>
+                        <option value="All">All</option>
+                    </select>
+                    <input type="date" id="fromDate" onchange="refreshTaskLogView()">
+                    <input type="date" id="toDate" onchange="refreshTaskLogView()">
+                    <select id="activityStatusFilter" onchange="refreshTaskLogView()"></select>
                 </div>
 
-                <div id="totalMinutes">
-                    Total Minutes: 0
+                <div style="margin-bottom:10px; display:flex; gap:20px; font-size:14px; font-weight:bold;">
+                    <div id="totalRecords">Total Records: 0</div>
+                    <div id="totalMinutes">Total Minutes: 0</div>
+                    <div id="totalHours">Total Hours: 0.0</div>
                 </div>
 
-                <div id="totalHours">
-                    Total Hours: 0.0
-                </div>
-
-            </div>
-
-
-<!--
-v1.2UI LOG TABLE HIDE START
--->
-            <table
-                id="taskLogTable"
-                class="data-table"
-                style="display:none;">
-
-
-                <colgroup>
-
-                    <col style="width:9%">
-                    <col style="width:38%">
-                    <col style="width:18%">
-                    <col style="width:6%">
-                    <col style="width:6%">
-                    <col style="width:6%">
-                    <col style="width:17%">
-                    <col style="width:10%">
-
-                </colgroup>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Date
-                        </th>
-
-                        <th>
-                            Task Description
-                        </th>
-
-                        <th>
-                            Activity
-                        </th>
-
-                        <th>
-                            Minutes
-                        </th>
-
-                        <th>
-                            Start
-                        </th>
-
-                        <th>
-                            End
-                        </th>
-
-                        <th>
-                            Context
-                        </th>
-
-                        <th>
-                            Actions
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody
-                    id="taskLogGrid">
-
-                </tbody>
-
-            </table>
-<!--
-v1.2UI LOG TABLE HIDE END
--->
-
-
-
-<!--
-v1.2UI LOG CARDS START
--->
-
-            <div
-                id="taskLogFeed">
-
-            </div>
-<!--
-v1.2UI LOG CARDS END
--->
-
-
-        </div>
-
-        <div id="footer"></div>
+                <table id="taskLogTable" class="data-table" style="display:none;">
+                    <colgroup>
+                        <col style="width:9%">
+                        <col style="width:38%">
+                        <col style="width:18%">
+                        <col style="width:6%">
+                        <col style="width:6%">
+                        <col style="width:6%">
+                        <col style="width:17%">
+                        <col style="width:10%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Task Description</th>
+                            <th>Activity</th>
+                            <th>Minutes</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Context</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taskLogGrid"></tbody>
+                </table>
+                <div id="taskLogFeed"></div>
+                </div> </div> <div id="footer"></div>
 
     </div>
 
-    <div
-        id="taskLogModal"
-        class="modal">
-
-        <div
-            class="modal-content">
-
-            <h2>
-                Task Log
-            </h2>
-
-            <input
-                type="hidden"
-                id="taskLogId">
-
-
-
-<!--
-v1.2bUI LOG MODAL REDESIGN
--->
-            <div class="form-row">
-
-                <div
-                    style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;">
-
-                    <label>
-                        Task Description
-                    </label>
-
-                    <small
-                        id="charCount">
-
-                        0 / 1000
-
-                    </small>
-
-                </div>
-
-                <textarea
-                    id="taskDescription"
-                    rows="1"
-                    maxlength="1000">
-
-                </textarea>
-
-            </div>
-
-
-<div
-    class="form-row mobile-stack">
-
-    <div>
-
-        <label>
-            Activity
-        </label>
-
-        <select
-            id="activityId"
-            onchange="activityChanged()">
-
-        </select>
-
-    </div>
-
-
-    <div>
-
-        <label>
-            Search Activity
-        </label>
-
-        <input
-            type="search"
-            id="activitySearch"
-            placeholder="Search..."
-            onkeyup="filterActivities()">
-
-    </div>
-
-</div>
-
+    <div id="taskLogModal" class="modal">
+        <div class="modal-content">
+            <h2>Task Log</h2>
+            <input type="hidden" id="taskLogId">
 
             <div class="form-row">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <label>Task Description</label>
+                    <small id="charCount">0 / 1000</small>
+                </div>
+                <textarea id="taskDescription" rows="1" maxlength="1000"></textarea>
+            </div>
 
-                <label>
-                    Context
-                </label>
+            <div class="form-row mobile-stack">
+                <div>
+                    <label>Activity</label>
+                    <select id="activityId" onchange="activityChanged()"></select>
+                </div>
+                <div>
+                    <label>Search Activity</label>
+                    <input type="search" id="activitySearch" placeholder="Search..." onkeyup="filterActivities()">
+                </div>
+            </div>
 
-                <div
-                    id="activityContext"
-                    style="
-                        padding:5px;
-                        background:#f8f9fa;
-                        border:1px solid #ddd;
-                        border-radius:4px;
-                        font-size:13px;">
-
+            <div class="form-row">
+                <label>Context</label>
+                <div id="activityContext" style="padding:5px; background:#f8f9fa; border:1px solid #ddd; border-radius:4px; font-size:13px;">
                     Select Activity
-
                 </div>
-
             </div>
 
-            <div
-                id="newActivitySection"
-                style="display:none;">
-
+            <div id="newActivitySection" style="display:none;">
                 <hr>
-
-
-<!--
-v1.2bUI LOG MODAL ACTIVITY ENTRY REDESIGN
--->
-
-                <h4
-                    style="margin:10px 0;">
-                    New Activity
-                </h4>
-
-
-<div
-    class="form-row time-row">
-
-    <div>
-
-        <label>
-            Activity Name
-        </label>
-
-        <input
-            id="newActivityName">
-
-    </div>
-
-    <div>
-
-        <label>
-            Milestone
-        </label>
-
-        <select
-            id="newActivityMilestone">
-
-            </select>
-
-    </div>
-
-</div>
-
-<div
-    class="form-row time-row">
-
-    <div>
-
-        <label>
-            Target Date
-        </label>
-
-        <input
-            type="date"
-            id="newActivityTargetDate">
-
-    </div>
-
-    <div>
-
-        <label>
-            Priority
-        </label>
-
-        <select
-            id="newActivityPriority">
-
-            </select>
-
-    </div>
-
-</div>
-
-
+                <h4 style="margin:10px 0;">New Activity</h4>
+                <div class="form-row time-row">
+                    <div>
+                        <label>Activity Name</label>
+                        <input id="newActivityName">
+                    </div>
+                    <div>
+                        <label>Milestone</label>
+                        <select id="newActivityMilestone"></select>
+                    </div>
+                </div>
+                <div class="form-row time-row">
+                    <div>
+                        <label>Target Date</label>
+                        <input type="date" id="newActivityTargetDate">
+                    </div>
+                    <div>
+                        <label>Priority</label>
+                        <select id="newActivityPriority"></select>
+                    </div>
+                </div>
             </div>
 
+            <div class="form-row time-row mobile-date-row">
+                <div>
+                    <label>Date</label>
+                    <input type="date" id="taskDate">
+                </div>
+                <div>
+                    <label>Start</label>
+                    <input type="time" id="startTime" onchange="calculateTimeFields()">
+                </div>
+                <div>
+                    <label>Min</label>
+                    <input type="number" id="minutesSpent" min="0" value="0" onchange="calculateTimeFields()">
+                </div>
+                <div>
+                    <label>End</label>
+                    <input type="time" id="endTime" onchange="calculateTimeFields()">
+                </div>
+            </div>
 
-<!--
-v1.1UI TIME FIELDS ROW
--->
-<div
-    class="form-row time-row mobile-date-row">
+            <details id="taskLogOptional" class="optional-section">
+                <summary>Additional Details</summary>
+                <div class="optional-content">
+                    <div class="form-row">
+                        <label>
+                            <input type="checkbox" id="markActivityCompleted"> Mark Activity Completed
+                        </label>
+                    </div>
+                </div>
+            </details>
 
-    <div>
-
-        <label>
-            Date
-        </label>
-
-        <input
-            type="date"
-            id="taskDate">
-
-    </div>
-
-    <div>
-
-        <label>
-            Start
-        </label>
-
-        <input
-            type="time"
-            id="startTime"
-            onchange="calculateTimeFields()">
-
-    </div>
-
-    <div>
-
-        <label>
-            Min
-        </label>
-
-        <input
-            type="number"
-            id="minutesSpent"
-            min="0"
-            value="0"
-            onchange="calculateTimeFields()">
-
-    </div>
-
-    <div>
-
-        <label>
-            End
-        </label>
-
-        <input
-            type="time"
-            id="endTime"
-            onchange="calculateTimeFields()">
-
-    </div>
-
-</div>
-
-
-
-
-
-<!--
-v1.1bUI COLLAPSE MARK COMPLETE SECTION
--->
-<details
-    id="taskLogOptional" 
-    class="optional-section">
-
-    <summary>
-
-        Additional Details
-
-    </summary>
-
-    <div
-        class="optional-content">
-
-        <div class="form-row">
-
-            <label>
-
-                <input
-                    type="checkbox"
-                    id="markActivityCompleted">
-
-                Mark Activity Completed
-
-            </label>
-
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="saveTaskLog()">Save</button>
+                <button class="btn btn-secondary" onclick="closeModal('taskLogModal')">Cancel</button>
+            </div>
         </div>
-
     </div>
 
-</details>
-
-
-<div
-    class="modal-actions">
-
-    <button
-        class="btn btn-primary"
-        onclick="saveTaskLog()">
-
-        Save
-
-    </button>
-
-    <button
-        class="btn btn-secondary"
-        onclick="closeModal('taskLogModal')">
-
-        Cancel
-
-    </button>
-
-</div>
-
-        </div>
-
-    </div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/config.js"></script>
     <script src="../js/supabase.js"></script>
     <script src="../js/auth.js"></script>
@@ -531,5 +180,4 @@ v1.1bUI COLLAPSE MARK COMPLETE SECTION
     <script>initializeAppIcon();</script>
 
 </body>
-
 </html>

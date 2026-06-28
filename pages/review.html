@@ -1,301 +1,141 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
-    <title>
-        Review Reporting 1
-    </title>
-
-    <link
-        rel="stylesheet"
-        href="../css/pwms.css">
-
+    <title>Review Reporting GG</title>
+    <link rel="stylesheet" href="../css/pwms.css">
+    <style>
+        /* Modern dashboard grids that naturally collapse on mobile viewports */
+        .dashboard-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+    </style>
 </head>
-
 <body>
 
     <div class="app-layout">
 
         <div id="header"></div>
 
-        <div id="sidebar"></div>
+        <div class="app-body-container">
 
-        <div id="content">
+            <div id="sidebar"></div>
 
-            <div class="page-header">
+            <div id="content">
 
-                <div class="page-title">
-                    Review v1 (Reporting & Analysis)
-                </div>
-
-                <button
-                    class="btn btn-primary"
-                    onclick="loadReviewData()">
-
-                    Refresh
-
-                </button>
-
-            </div>
-
-            <!-- Activity Summary -->
-
-            <div class="section-header">
-                <B><U>Activity Summary</U></B>
-            </div>
-
-            <div
-                class="dashboard-grid"
-                style="
-                    display:grid;
-                    grid-template-columns:
-                        repeat(4, 1fr);
-                    gap:15px;
-                    margin-bottom:20px;">
-
-                <div class="form-card">
-
-                    <div>
-                        Open Activities
+                <div class="page-header">
+                    <div class="page-title">
+                        Review GG (Reporting & Analysis)
                     </div>
-
-                    <h2 id="openActivities">
-                        0
-                    </h2>
-
+                    <button class="btn btn-primary" onclick="loadReviewData()">
+                        Refresh
+                    </button>
                 </div>
 
-                <div class="form-card">
+                <div class="section-header">
+                    <strong>Activity Summary</strong>
+                </div>
 
-                    <div>
-                        In Progress
+                <div class="dashboard-metrics-grid">
+                    <div class="form-card">
+                        <div>Open Activities</div>
+                        <h2 id="openActivities">0</h2>
                     </div>
-
-                    <h2 id="inProgressActivities">
-                        0
-                    </h2>
-
-                </div>
-
-                <div class="form-card">
-
-                    <div>
-                        Completed
+                    <div class="form-card">
+                        <div>In Progress</div>
+                        <h2 id="inProgressActivities">0</h2>
                     </div>
-
-                    <h2 id="completedActivities">
-                        0
-                    </h2>
-
-                </div>
-
-                <div class="form-card">
-
-                    <div>
-                        Overdue
+                    <div class="form-card">
+                        <div>Completed</div>
+                        <h2 id="completedActivities">0</h2>
                     </div>
-
-                    <h2 id="overdueActivities">
-                        0
-                    </h2>
-
-                </div>
-
-            </div>
-
-            <!-- Time Summary -->
-
-            <div class="section-header">
-                <B><U>Time Summary</U></B>
-            </div>
-
-            <div
-                class="dashboard-grid"
-                style="
-                    display:grid;
-                    grid-template-columns:
-                        repeat(3, 1fr);
-                    gap:15px;
-                    margin-bottom:20px;">
-
-                <div class="form-card">
-
-                    <div>
-                        Today
+                    <div class="form-card">
+                        <div>Overdue</div>
+                        <h2 id="overdueActivities">0</h2>
                     </div>
-
-                    <h2 id="todayHours">
-                        0.0 hrs
-                    </h2>
-
                 </div>
 
-                <div class="form-card">
+                <div class="section-header">
+                    <strong>Time Summary</strong>
+                </div>
 
-                    <div>
-                        This Week
+                <div class="dashboard-metrics-grid">
+                    <div class="form-card">
+                        <div>Today</div>
+                        <h2 id="todayHours">0.0 hrs</h2>
                     </div>
-
-                    <h2 id="weekHours">
-                        0.0 hrs
-                    </h2>
-
-                </div>
-
-                <div class="form-card">
-
-                    <div>
-                        This Month
+                    <div class="form-card">
+                        <div>This Week</div>
+                        <h2 id="weekHours">0.0 hrs</h2>
                     </div>
+                    <div class="form-card">
+                        <div>This Month</div>
+                        <h2 id="monthHours">0.0 hrs</h2>
+                    </div>
+                </div>
 
-                    <h2 id="monthHours">
-                        0.0 hrs
-                    </h2>
+                <div class="section-header">
+                    <strong>Time By Portfolio</strong>
+                </div>
 
+                <div class="table-container">
+                    <table class="data-table" style="margin-bottom:20px;">
+                        <thead>
+                            <tr>
+                                <th>Portfolio</th>
+                                <th>Hours</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody id="portfolioTimeGrid"></tbody>
+                    </table>
+                </div>
+
+                <div class="section-header">
+                    <strong>Open Activities</strong>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table" style="margin-bottom:20px;">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Status</th>
+                                <th>Target Date</th>
+                                <th>Context</th>
+                            </tr>
+                        </thead>
+                        <tbody id="openActivitiesGrid"></tbody>
+                    </table>
+                </div>
+
+                <div class="section-header">
+                    <strong>Recent Work</strong>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Task Description</th>
+                                <th>Activity</th>
+                                <th>Minutes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentLogsGrid"></tbody>
+                    </table>
                 </div>
 
             </div>
 
-            <!-- Time By Portfolio -->
-
-            <div class="section-header">
-                <B><U>Time By Portfolio</U></B>
-            </div>
-
-            <div class="table-container">
-
-            <table
-                class="data-table"
-                style="margin-bottom:20px;">
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Portfolio
-                        </th>
-
-                        <th>
-                            Hours
-                        </th>
-
-                        <th>
-                            %
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody
-                    id="portfolioTimeGrid">
-
-                </tbody>
-
-            </table>
-
-            </div>
-
-            <!-- Open Activities -->
-
-            <div class="section-header">
-                <B><U>Open Activities</U></B>
-            </div>
-
-            <div class="table-container">
-
-            <table
-                class="data-table"
-                style="margin-bottom:20px;">
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Activity
-                        </th>
-
-                        <th>
-                            Status
-                        </th>
-
-                        <th>
-                            Target Date
-                        </th>
-
-                        <th>
-                            Context
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody
-                    id="openActivitiesGrid">
-
-                </tbody>
-
-            </table>
-
-            </div>
-
-            <!-- Recent Work -->
-
-            <div class="section-header">
-                <B><U>Recent Work</U></B>
-            </div>
-
-            <div class="table-container">
-
-            <table
-                class="data-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Date
-                        </th>
-
-                        <th>
-                            Task Description
-                        </th>
-
-                        <th>
-                            Activity
-                        </th>
-
-                        <th>
-                            Minutes
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody
-                    id="recentLogsGrid">
-
-                </tbody>
-
-            </table>
-
-            </div>
-
-        </div>
-
-        <div id="footer"></div>
+        </div> <div id="footer"></div>
 
     </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../js/config.js"></script>
     <script src="../js/supabase.js"></script>
     <script src="../js/auth.js"></script>
@@ -307,5 +147,4 @@
     <script>initializeAppIcon();</script>
 
 </body>
-
 </html>

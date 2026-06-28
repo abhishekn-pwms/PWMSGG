@@ -1,512 +1,138 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <title>
-        ToDo V1
-    </title>
-
-    <link
-        rel="stylesheet"
-        href="../css/pwms.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo GG V1</title>
+    <link rel="stylesheet" href="../css/pwms.css">
 </head>
-
 <body>
 
     <div class="app-layout">
 
-        <!-- ==============================
-             HEADER
-        =============================== -->
-
         <div id="header"></div>
 
-        <!-- ==============================
-             SIDEBAR
-        =============================== -->
+        <div class="app-body-container">
 
-        <div id="sidebar"></div>
+            <div id="sidebar"></div>
 
-        <!-- ==============================
-             CONTENT
-        =============================== -->
+            <div id="content">
 
-        <div id="content">
-
-            <div class="page-header">
-
-                <div class="page-title">
-
-                    ToDo v1
-
+                <div class="page-header">
+                    <div class="page-title">ToDo GG v1</div>
+                    <button class="btn btn-primary" onclick="newTodo()">
+                        + New ToDo
+                    </button>
                 </div>
 
-                <button
-                    class="btn btn-primary"
-                    onclick="newTodo()">
-
-                    + New ToDo
-
-                </button>
-
-            </div>
-
-
-            <!-- ==============================
-                 FILTERS
-            =============================== -->
-
-            <div class="toolbar">
-
-                <input
-                    type="search"
-                    id="searchText"
-                    class="search-box"
-                    placeholder="Search ToDo..."
-                    onkeyup="refreshTodoView()">
-
-                <select
-                    id="statusFilter"
-                    onchange="refreshTodoView()">
-
-                    <option
-                        value="Open"
-                        selected>
-
-                        Open
-
-                    </option>
-
-                    <option
-                        value="Completed">
-
-                        Completed
-
-                    </option>
-
-                    <option
-                        value="All">
-
-                        All
-
-                    </option>
-
-                </select>
-
-                <select
-                    id="activityFilter"
-                    onchange="refreshTodoView()">
-
-                    <option
-                        value="All">
-
-                        All Activities
-
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <!-- ==============================
-                 SUMMARY
-            =============================== -->
-
-            <div
-                style="
-                    display:flex;
-                    gap:20px;
-                    margin-bottom:15px;
-                    font-weight:bold;">
-
-                <div id="totalOpen">
-
-                    Open: 0
-
+                <div class="toolbar">
+                    <input type="search" id="searchText" class="search-box" placeholder="Search ToDo..." onkeyup="refreshTodoView()">
+                    <select id="statusFilter" onchange="refreshTodoView()">
+                        <option value="Open" selected>Open</option>
+                        <option value="Completed">Completed</option>
+                        <option value="All">All</option>
+                    </select>
+                    <select id="activityFilter" onchange="refreshTodoView()">
+                        <option value="All">All Activities</option>
+                    </select>
                 </div>
 
-                <div id="totalCompleted">
-
-                    Completed: 0
-
+                <div style="display:flex; gap:20px; margin-bottom:15px; font-weight:bold;">
+                    <div id="totalOpen">Open: 0</div>
+                    <div id="totalCompleted">Completed: 0</div>
+                    <div id="totalOverdue">Overdue: 0</div>
                 </div>
 
-                <div id="totalOverdue">
+                <div id="todoFeed"></div>
 
-                    Overdue: 0
-
-                </div>
-
-            </div>
-
-
-            <!-- ==============================
-                 FEED
-            =============================== -->
-
-            <div
-                id="todoFeed">
-
-            </div>
-
-        </div>
-
-        <!-- ==============================
-             FOOTER
-        =============================== -->
-
-        <div id="footer"></div>
+            </div> </div> <div id="footer"></div>
 
     </div>
 
+    <div id="todoModal" class="modal">
+        <div class="modal-content">
+            <h2>ToDo</h2>
+            <input type="hidden" id="todoId">
 
-    <!-- ==============================
-         TODO MODAL
-    =============================== -->
-
-    <div
-        id="todoModal"
-        class="modal">
-
-        <div
-            class="modal-content">
-
-            <h2>
-
-                ToDo
-
-            </h2>
-
-            <input
-                type="hidden"
-                id="todoId">
-
-
-            <!-- ==========================
-                 TODO + DUE DATE
-            =========================== -->
-
-            <div
-                class="form-row time-row">
-
+            <div class="form-row time-row">
                 <div>
-
-                    <label>
-
-                        ToDo
-
-                    </label>
-
-                    <input
-                        id="todoText">
-
+                    <label>ToDo</label>
+                    <input id="todoText">
                 </div>
-
                 <div>
-
-                    <label>
-
-                        Due Date
-
-                    </label>
-
-                    <input
-                        type="date"
-                        id="dueDate">
-
+                    <label>Due Date</label>
+                    <input type="date" id="dueDate">
                 </div>
-
             </div>
 
-
-            <!-- ==========================
-                 ACTIVITY + SEARCH
-            =========================== -->
-
-            <div
-                class="form-row time-row">
-
+            <div class="form-row time-row">
                 <div>
-
-                    <label>
-
-                        Activity
-
-                    </label>
-
-                    <select
-                        id="activityId"
-                        onchange="activityChanged()">
-
-                    </select>
-
+                    <label>Activity</label>
+                    <select id="activityId" onchange="activityChanged()"></select>
                 </div>
-
                 <div>
-
-                    <label>
-
-                        Search Activity
-
-                    </label>
-
-                    <input
-                        type="search"
-                        id="activitySearch"
-                        placeholder="Search..."
-                        onkeyup="filterActivities()">
-
+                    <label>Search Activity</label>
+                    <input type="search" id="activitySearch" placeholder="Search..." onkeyup="filterActivities()">
                 </div>
-
             </div>
 
-
-            <!-- ==========================
-                 CONTEXT
-            =========================== -->
-
-            <div
-                class="form-row">
-
-                <label>
-
-                    Context
-
-                </label>
-
-                <div
-                    id="activityContext"
-                    style="
-                        padding:5px;
-                        background:#f8f9fa;
-                        border:1px solid #ddd;
-                        border-radius:4px;
-                        font-size:13px;">
-
+            <div class="form-row">
+                <label>Context</label>
+                <div id="activityContext" style="padding:5px; background:#f8f9fa; border:1px solid #ddd; border-radius:4px; font-size:13px;">
                     Select Activity
-
                 </div>
-
             </div>
 
-
-            <!-- ==========================
-                 INLINE ACTIVITY
-            =========================== -->
-
-            <div
-                id="newActivitySection"
-                style="display:none;">
-
+            <div id="newActivitySection" style="display:none;">
                 <hr>
-
-                <h4>
-
-                    New Activity
-
-                </h4>
-
-                <div
-                    class="form-row time-row">
-
+                <h4>New Activity</h4>
+                <div class="form-row time-row">
                     <div>
-
-                        <label>
-
-                            Activity Name
-
-                        </label>
-
-                        <input
-                            id="newActivityName">
-
+                        <label>Activity Name</label>
+                        <input id="newActivityName">
                     </div>
-
                     <div>
-
-                        <label>
-
-                            Milestone
-
-                        </label>
-
-                        <select
-                            id="newActivityMilestone">
-
-                        </select>
-
+                        <label>Milestone</label>
+                        <select id="newActivityMilestone"></select>
                     </div>
-
                 </div>
-
-                <div
-                    class="form-row time-row">
-
+                <div class="form-row time-row">
                     <div>
-
-                        <label>
-
-                            Target Date
-
-                        </label>
-
-                        <input
-                            type="date"
-                            id="newActivityTargetDate">
-
+                        <label>Target Date</label>
+                        <input type="date" id="newActivityTargetDate">
                     </div>
-
                     <div>
-
-                        <label>
-
-                            Priority
-
-                        </label>
-
-                        <select
-                            id="newActivityPriority">
-
-                        </select>
-
+                        <label>Priority</label>
+                        <select id="newActivityPriority"></select>
                     </div>
-
                 </div>
-
             </div>
 
-
-            <!-- ==========================
-                 NOTES + STATUS
-            =========================== -->
-
-            <div
-                class="form-row">
-
-                <div
-                    style="
-                        display:flex;
-                        justify-content:space-between;
-                        align-items:center;">
-
-                    <label>
-
-                        Notes
-
-                    </label>
-
+            <div class="form-row">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <label>Notes</label>
                     <div>
-
-                        <label>
-
-                            Status
-
-                        </label>
-
-                        <select
-                            id="todoStatus">
-
-                            <option
-                                value="Open">
-
-                                Open
-
-                            </option>
-
-                            <option
-                                value="Completed">
-
-                                Completed
-
-                            </option>
-
+                        <label>Status</label>
+                        <select id="todoStatus">
+                            <option value="Open">Open</option>
+                            <option value="Completed">Completed</option>
                         </select>
-
                     </div>
-
                 </div>
-
-                <textarea
-                    id="notes"
-                    rows="1">
-
-                </textarea>
-
+                <textarea id="notes" rows="1"></textarea>
             </div>
-
-
-            <!-- ==========================
-                 BUTTONS
-            =========================== -->
 
             <div class="modal-actions">
-
-                <button
-                    class="btn btn-primary"
-                    onclick="saveTodo()">
-
-                    Save
-
-                </button>
-
-                <button
-                    class="btn btn-secondary"
-                    onclick="closeModal('todoModal')">
-
-                    Cancel
-
-                </button>
-
-
-
-                <button
-                    id="deleteTodoButton"
-                    class="btn btn-danger"
-                    onclick="deleteCurrentTodo()"
-                    style="
-                        display:none;
-                        font-size:18px;
-                        cursor:pointer;
-                        margin-left:auto;"
-                >
-
+                <button class="btn btn-primary" onclick="saveTodo()">Save</button>
+                <button class="btn btn-secondary" onclick="closeModal('todoModal')">Cancel</button>
+                <button id="deleteTodoButton" class="btn btn-danger" onclick="deleteCurrentTodo()" style="display:none; font-size:18px; cursor:pointer; margin-left:auto;">
                     &#128465;&#65039;
-                    <!--
-                    OR
-                    &#128465;
-                    OR
-                    🗑
-                    OR
-                    🗑️
-                    -->
-
                 </button>
-
-
-
-
             </div>
         </div>
-
     </div>
 
-
-    <!-- ==============================
-         SCRIPTS
-    =============================== -->
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <script src="../js/config.js"></script>
     <script src="../js/supabase.js"></script>
     <script src="../js/auth.js"></script>
@@ -517,5 +143,4 @@
     <script src="../js/todo.js"></script>
 
 </body>
-
 </html>
