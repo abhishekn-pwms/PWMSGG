@@ -2,26 +2,30 @@ Date : Mon, 29-Jun-2026
 
 \------------------
 
+Release PWMS v1.5a UX Enhancements for Ease of Use & Initiated Dashboard View
+🚀 What's New
+This release focuses entirely on reducing execution friction, minimizing manual clicks, and optimization for desktop and mobile efficiency.
 
-Release PWMSGG v1.04
+* Keyboard-Driven Data Entry: Added a universal Enter key form submission shortcut to Portfolio, Project, Milestone, Activity, ToDo, and Task Log modals. Pressing Enter now instantly saves your progress across all pop-up modules (safely bypassed when actively typing inside description textareas).
+* High-Visibility Contrast Overhaul: Upgraded all structural borders (#cbd5e1) and integrated a distinct active focus ring blue aura (#2563eb) around all inputs, dropdown selectors, and textareas so your active field always pops on white canvas background configurations.
+* Alternate Row Zebra Banding: Injected clean, low-fatigue alternate background striping (#f8fafc) directly into your data logging grids to ease tracking metrics across wide desktop views.
+* Bottom-Right Quick Actions (Mobile-First FABs): * Single-Click Quick Adds: Anchored instantaneous floating + buttons on the ToDo and Task Log feeds for single-handed thumb-reach access.
+* Universal Expandable Accelerator: Implemented an expandable multi-action speed-dial menu on all master and tracking indexes, allowing you to quickly spin up a New ToDo or Log Task from anywhere in the app without losing your current workspace context.
+
+** Initiated Designing multi-tier Operational Cockpit view!!
+
+
 \---
-
-
+Release PWMSGG v1.04 Stable
+\---
 
 \## 🚀 Core Features \& Modules
 
-
-
 \### 1. Unified Mobile-Responsive UI
-
 \* \*\*Fluid Layout Framework:\*\* Built using a flexible, dynamic structure (`.app-body-container`) that ensures a sticky top header and a bottom footer that never clips or collides with content.
-
 \* \*\*Modern Aesthetic:\*\* Transitioned from raw monospace fonts to a crisp, variable system sans-serif font stack with refined drop shadows, modern borders, and smooth transitions.
-
 \* \*\*Touch-First Ergonomics:\*\* All interactive buttons, fields, selects, and menus maintain a minimum height of `44px` on mobile, eliminating cramped tap targets.
-
 \* \*\*Collapsible Sidebar:\*\* Dynamically transitions from a left-docked desktop menu to a clean, space-saving slide-out overlay drawer on mobile viewports.
-
 
 
 \### 2. Core Operational Modules
