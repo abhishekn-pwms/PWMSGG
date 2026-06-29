@@ -85,30 +85,32 @@
             <h2>Task Log</h2>
             <input type="hidden" id="taskLogId">
 
-            <div class="form-row">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <label>Task Description</label>
-                    <small id="charCount">0 / 1000</small>
-                </div>
-                <textarea id="taskDescription" rows="1" maxlength="1000"></textarea>
+            <div class="toolbar">
+                <label style="max-width:45%;">Task Description</label>
+                <small style="max-width:25%; text-align:right;" id="charCount">0 / 1000</small>
+                <label style="max-width:30%; text-align:center;">Date</label>
             </div>
 
-            <div class="form-row mobile-stack">
-                <div>
-                    <label>Activity</label>
-                    <select id="activityId" onchange="activityChanged()"></select>
-                </div>
-                <div>
-                    <label>Search Activity</label>
-                    <input type="search" id="activitySearch" placeholder="Search..." onkeyup="filterActivities()">
-                </div>
+            <div class="toolbar">
+                <textarea style="min-height:30px; min-width:70%;" id="taskDescription" rows="2" maxlength="1000"></textarea>
+                <input style="text-align:right;" type="date" id="taskDate">
             </div>
 
-            <div class="form-row">
-                <label>Context</label>
-                <div id="activityContext" style="padding:5px; background:#f8f9fa; border:1px solid #ddd; border-radius:4px; font-size:13px;">
+
+            <div class="toolbar">
+                    <label style="max-width:10%;">Activity: </label>
+                    <select id="activityId" style="max-width:51%;" onchange="activityChanged()"></select>
+                    &nbsp;&nbsp;
+                    <label style="font-size:10px; max-width:15%; text-align:right;">Search Activity: </label>
+                    <input type="search" style="max-width:25%;" id="activitySearch" placeholder="Search..." onkeyup="filterActivities()">
+            </div>
+
+
+            <div class="toolbar">
+                <label style="max-width:15%;">Context:&nbsp;&nbsp;</label>
+                <label id="activityContext" style="padding:5px; background:#f8f9fa; border:1px solid #ddd; border-radius:4px; font-size:11px;">
                     Select Activity
-                </div>
+                </label>
             </div>
 
             <div id="newActivitySection" style="display:none;">
@@ -136,33 +138,37 @@
                 </div>
             </div>
 
-            <div class="form-row time-row mobile-date-row">
-                <div>
-                    <label>Date</label>
-                    <input type="date" id="taskDate">
-                </div>
-                <div>
-                    <label>Start</label>
-                    <input type="time" id="startTime" onchange="calculateTimeFields()">
-                </div>
-                <div>
-                    <label>Min</label>
-                    <input type="number" id="minutesSpent" min="0" value="0" onchange="calculateTimeFields()">
-                </div>
-                <div>
-                    <label>End</label>
-                    <input type="time" id="endTime" onchange="calculateTimeFields()">
-                </div>
+
+            <div class="toolbar">
+                <label style="max-width:8%;">Start:&nbsp;</label>
+                <input type="time" id="startTime" onchange="calculateTimeFields()" style="max-width:25%;">
+                    
+                &nbsp;
+
+                <label style="max-width:12%; text-align:right;">Mins:&nbsp;</label>
+                <input type="number" id="minutesSpent" min="0" value="0" onchange="calculateTimeFields()" style="max-width:15%;">
+            
+                &nbsp;
+                    
+                <label style="max-width:15%; text-align:right;">End:&nbsp;</label>
+                <input type="time" id="endTime" onchange="calculateTimeFields()" style="max-width:25%;">
             </div>
 
-            <details id="taskLogOptional" class="optional-section">
+
+            <details id="taskLogOptional" class="optional-section" style="cursor:pointer;">
                 <summary>Additional Details</summary>
                 <div class="optional-content">
-                    <div class="form-row">
-                        <label>
-                            <input type="checkbox" id="markActivityCompleted"> Mark Activity Completed
-                        </label>
-                    </div>
+
+
+                <div class="form-row" style="text-align:right;">
+                    <input type="checkbox" style="width:12px; height:12px;" id="markActivityCompleted">
+                    &nbsp;
+                    <label>
+                        Mark Activity Completed?
+                    </label>
+                </div>
+
+
                 </div>
             </details>
 
@@ -184,6 +190,8 @@
     <script src="../js/task-log.js"></script>
 
     <script>initializeAppIcon();</script>
+
+    <button class="fab-btn" title="Log New Task" onclick="newTaskLog()">+</button>
 
 </body>
 </html>

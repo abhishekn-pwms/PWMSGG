@@ -79,11 +79,17 @@
                 <textarea id="description"></textarea>
             </div>
 
-            <div class="form-row">
+
+            <div class="form-row" style="text-align:right;">
+                <input type="checkbox" style="width:12px; height:12px;" id="enabled" checked>
+                &nbsp;
                 <label>
-                    <input type="checkbox" id="enabled" checked> Enabled
+                    Enabled?
                 </label>
             </div>
+
+            <br>
+
 
             <button class="btn btn-primary" onclick="savePortfolio()">Save</button>
             <button class="btn btn-secondary" onclick="closeModal('portfolioModal')">Cancel</button>
@@ -101,6 +107,14 @@
     <script src="../js/portfolio.js"></script>
 
     <script>initializeAppIcon();</script>
+
+    <div class="fab-container" id="universalFab" onclick="this.classList.toggle('active')">
+        <button class="fab-trigger">＋</button>
+        <div class="fab-options">
+            <a href="todo.html?action=new" class="fab-sub-btn">📝 New ToDo</a>
+            <a href="task-log.html?action=new" class="fab-sub-btn">⏱️ Log Task</a>
+        </div>
+    </div>
 
 </body>
 </html>

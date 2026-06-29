@@ -84,31 +84,42 @@
                 <input id="milestoneName">
             </div>
 
-            <div class="form-row">
-                <label>Description</label>
-                <textarea id="description"></textarea>
+
+
+            <div class="toolbar">
+                <label style="max-width:15%;">Description:&nbsp;</label>
+                <textarea id="description" style="max-width:50%;" rows="3"></textarea>
+
+                &nbsp;&nbsp;
+
+                <label style="max-width:10%;text-align:right;">Status:&nbsp;</label>
+                <select id="milestoneStatus" style="max-width:25%;"></select>
             </div>
 
-            <div class="form-row">
-                <label>Start Date</label>
-                <input type="date" id="startDate">
+
+            <div class="toolbar">
+                <label style="max-width:15%;">Start Date:&nbsp;</label>
+                <input type="date" id="startDate" style="max-width:30%;">
+
+                &nbsp;&nbsp;&nbsp;&nbsp;
+
+                <label style="max-width:25%;text-align:right;">Target Date:&nbsp;</label>
+                <input type="date" id="targetDate" style="max-width:30%;">
             </div>
 
-            <div class="form-row">
-                <label>Target Date</label>
-                <input type="date" id="targetDate">
-            </div>
 
-            <div class="form-row">
-                <label>Status</label>
-                <select id="milestoneStatus"></select>
-            </div>
 
-            <div class="form-row">
+            <div class="form-row" style="text-align:right;">
+                <input type="checkbox" style="width:12px; height:12px;" id="enabled" checked>
+                &nbsp;
                 <label>
-                    <input type="checkbox" id="enabled" checked> Enabled
+                    Enabled?
                 </label>
             </div>
+
+            <br>
+
+
 
             <button class="btn btn-primary" onclick="saveMilestone()">Save</button>
             <button class="btn btn-secondary" onclick="closeModal('milestoneModal')">Cancel</button>
@@ -126,6 +137,14 @@
     <script src="../js/milestone.js"></script>
 
     <script>initializeAppIcon();</script>
+
+    <div class="fab-container" id="universalFab" onclick="this.classList.toggle('active')">
+        <button class="fab-trigger">＋</button>
+        <div class="fab-options">
+            <a href="todo.html?action=new" class="fab-sub-btn">📝 New ToDo</a>
+            <a href="task-log.html?action=new" class="fab-sub-btn">⏱️ Log Task</a>
+        </div>
+    </div>
 
 </body>
 </html>

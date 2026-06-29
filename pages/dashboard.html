@@ -3,56 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dashboard GG 0 (Operational Homepage)</title>
+    <title>Dashboard Focus Engine</title>
     <link rel="stylesheet" href="../css/pwms.css">
+    <style>
+        /* 🚀 DASHBOARD GRID ARCHITECTURE */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 12px;
+            width: 100%;
+        }
+        .dashboard-full-row {
+            grid-column: span 2;
+        }
+        .focus-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 14px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+        }
+        .focus-section-header {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--background);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dashboard-badge {
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+        .badge-alert { background: #fee2e2; color: #ef4444; }
+        .badge-neutral { background: #f1f5f9; color: #475569; }
+
+        /* Compact Mini-Lists */
+        .compact-stream {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        .stream-item {
+            padding: 8px 10px;
+            border-radius: var(--radius);
+            border-left: 3px solid var(--border);
+            background: var(--background);
+            font-size: 0.82rem;
+            transition: transform 0.15s ease;
+        }
+        .stream-item:hover {
+            transform: translateX(2px);
+        }
+        .item-meta {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
 
     <div class="app-layout">
-
         <div id="header"></div>
 
         <div class="app-body-container">
-
             <div id="sidebar"></div>
 
             <div id="content">
 
                 <div class="page-header">
-                    <div class="page-title">
-                        Dashboard GG (Operational Homepage)
+                    <div class="page-title">Operational Cockpit</div>
+                    <div style="display:flex; gap:8px;">
+                        <button class="btn btn-primary" onclick="window.location.href='todo.html'">+ ToDo</button>
+                        <button class="btn btn-primary" onclick="window.location.href='task-log.html'">+ Log Time</button>
+                        <button class="btn btn-secondary" onclick="refreshFocusDashboard()">🔄</button>
                     </div>
                 </div>
 
-                <div class="form-card">
-                    Dashboard coming soon...
+                <div class="summary-horizontal-row" style="display: flex; gap: 10px; margin-bottom: 14px;">
+                    <div class="form-card" style="flex:1; padding:10px; text-align:center;">
+                        <div style="font-size:0.75rem; color:var(--text-muted);">Hours Today</div>
+                        <h2 id="summaryToday">0.0h</h2>
+                    </div>
+                    <div class="form-card" style="flex:1; padding:10px; text-align:center;">
+                        <div style="font-size:0.75rem; color:var(--text-muted);">Open ToDos</div>
+                        <h2 id="summaryTodos">0</h2>
+                    </div>
+                    <div class="form-card" style="flex:1; padding:10px; text-align:center;">
+                        <div style="font-size:0.75rem; color:var(--text-muted);">Active Milestones</div>
+                        <h2 id="summaryMilestones">0</h2>
+                    </div>
                 </div>
 
-            </div>
+                <div class="dashboard-grid">
 
-        </div> <div id="footer"></div>
+                    <div class="focus-section">
+                        <div class="focus-section-header">
+                            <span>Target Milestone Runway</span>
+                            <span id="countMilestones" class="dashboard-badge badge-neutral">0</span>
+                        </div>
+                        <div id="milestoneRunway" class="compact-stream">
+                            </div>
+                    </div>
 
+                    <div class="focus-section">
+                        <div class="focus-section-header">
+                            <span>Daily Action Desk</span>
+                            <span id="countTodos" class="dashboard-badge badge-alert">0</span>
+                        </div>
+                        <div id="todoActionDesk" style="cursor:pointer;" class="compact-stream">
+                            </div>
+                    </div>
+
+                    <div class="focus-section dashboard-full-row">
+                        <div class="focus-section-header">
+                            <span>Recent Activity Velocity (Last 48 Hours)</span>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date/Time</th>
+                                        <th>Tracked Description</th>
+                                        <th>Activity Context</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="taskLogStream">
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div> </div>
+        </div>
+        <div id="footer"></div>
     </div>
 
-    <script src="../js/config.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/config.js"></script>
     <script src="../js/supabase.js"></script>
     <script src="../js/auth.js"></script>
     <script src="../js/navigation.js"></script>
     <script src="../js/components.js"></script>
     <script src="../js/app.js"></script>
-
+    <script src="../js/dashboard.js"></script>
     <script>initializeAppIcon();</script>
 
-    <script>
-    document.addEventListener(
-        "DOMContentLoaded",
-        async () => {
-            await requireAuthentication();
-            await initializeLayout();
-        }
-    );
-    </script>
+    <div class="fab-container" id="universalFab" onclick="this.classList.toggle('active')">
+        <button class="fab-trigger">＋</button>
+        <div class="fab-options">
+            <a href="todo.html?action=new" class="fab-sub-btn">📝 New ToDo</a>
+            <a href="task-log.html?action=new" class="fab-sub-btn">⏱️ Log Task</a>
+        </div>
+    </div>
 
 </body>
 </html>

@@ -59,25 +59,30 @@
                     <label>ToDo</label>
                     <input id="todoText">
                 </div>
-                <div>
-                    <label>Due Date</label>
-                    <input type="date" id="dueDate">
-                </div>
+
             </div>
 
-            <div class="form-row time-row">
-                <div>
-                    <label>Activity</label>
-                    <select id="activityId" onchange="activityChanged()"></select>
-                </div>
-                <div>
-                    <label>Search Activity</label>
-                    <input type="search" id="activitySearch" placeholder="Search..." onkeyup="filterActivities()">
-                </div>
+            <div class="toolbar">
+                <label>Due Date:&nbsp;&nbsp;</label><input type="date" id="dueDate">
+                <label style="text-align:right;">Status:&nbsp;&nbsp;</label>
+                <select id="todoStatus">
+                    <option value="Open">Open</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+
+
+
+            <div class="toolbar">
+                    <label style="max-width:10%;">Activity: </label>
+                    <select id="activityId" style="max-width:51%;" onchange="activityChanged()"></select>
+                    &nbsp;&nbsp;
+                    <label style="font-size:10px; max-width:15%; text-align:right;">Search Activity: </label>
+                    <input type="search" style="max-width:25%;" id="activitySearch" placeholder="Search..." onkeyup="filterActivities()">
             </div>
 
             <div class="form-row">
-                <label>Context</label>
+                <label>Context</label>&nbsp;&nbsp;
                 <div id="activityContext" style="padding:5px; background:#f8f9fa; border:1px solid #ddd; border-radius:4px; font-size:13px;">
                     Select Activity
                 </div>
@@ -111,15 +116,8 @@
             <div class="form-row">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <label>Notes</label>
-                    <div>
-                        <label>Status</label>
-                        <select id="todoStatus">
-                            <option value="Open">Open</option>
-                            <option value="Completed">Completed</option>
-                        </select>
-                    </div>
                 </div>
-                <textarea id="notes" rows="1"></textarea>
+                <textarea id="notes" rows="2"></textarea>
             </div>
 
             <div class="modal-actions">
@@ -141,6 +139,8 @@
     <script src="../js/masters.js"></script>
     <script src="../js/app.js"></script>
     <script src="../js/todo.js"></script>
+
+    <button class="fab-btn" title="Add New ToDo" onclick="newTodo()">+</button>
 
 </body>
 </html>
