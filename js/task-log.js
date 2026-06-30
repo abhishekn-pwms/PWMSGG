@@ -1,6 +1,4 @@
-
-//Version 2 Quicklog
-
+//Quicklog Fix from Desktop
 
 let taskLogData = [];
 
@@ -1108,4 +1106,323 @@ async function saveTaskLog() {
         if (!taskLogId) {
 
             payload.created_by =
-                g
+                getCurrentUser();
+
+            await insertData(
+                "task_log",
+                payload
+            );
+        }
+        else {
+
+            await updateData(
+                "task_log",
+                "task_log_id",
+                taskLogId,
+                payload
+            );
+        }
+
+        if (
+            document.getElementById(
+                "markActivityCompleted"
+            ).checked
+        ) {
+
+            await updateData(
+                "activity",
+                "activity_id",
+                activityId,
+                {
+                    status: "Completed",
+                    updated_by:
+                        getCurrentUser()
+                }
+            );
+        }
+
+        closeModal(
+            "taskLogModal"
+        );
+
+        await loadActivities();
+
+        await loadTaskLogs();
+
+        showSuccess(
+            "Task Log saved successfully"
+        );
+    }
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+        showError(
+            "Unable to save task log"
+        );
+    }
+}
+
+async function createInlineActivity() {
+
+    const activityName =
+        getInputValue(
+            "newActivityName"
+        ).trim();
+
+    if (!activityName) {
+
+        showError(
+            "Activity Name is required"
+        );
+
+        return null;
+    }
+
+    const payload = {
+
+        activity_name:
+            activityName,
+
+        milestone_id:
+            getInputValue(
+                "newActivityMilestone"
+            ) || null,
+
+        target_date:
+            getInputValue(
+                "newActivityTargetDate"
+            ) || null,
+
+        priority:
+            getInputValue(
+                "newActivityPriority"
+            ) || "Medium",
+
+        status:
+            "Not Started",
+
+        display_order:
+            100,
+
+        enabled:
+            true,
+
+        created_by:
+            getCurrentUser(),
+
+        updated_by:
+            getCurrentUser()
+    };
+
+    const result =
+        await insertData(
+            "activity",
+            payload
+        );
+
+    await loadActivities();
+
+    return result?.[0]?.activity_id;
+}
+
+async function deleteTaskLog(id) {
+
+    if (
+        !confirmAction(
+            "Delete Task Log?"
+        )
+    ) {
+        return;
+    }
+
+    try {
+
+        await deleteData(
+            "task_log",
+            "task_log_id",
+            id
+        );
+
+        await loadTaskLogs();
+
+        showSuccess(
+            "Task Log deleted"
+        );
+    }
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+        showError(
+            "Unable to delete task log"
+        );
+    }
+}
+
+
+/* ==================================
+   v1.1UI TIME FIELDS CALCULATION
+================================== */
+
+function calculateTimeFields() {
+
+    const start =
+        document.getElementById(
+            "startTime"
+        ).value;
+
+    const end =
+        document.getElementById(
+            "endTime"
+        ).value;
+
+    const minutes =
+        parseInt(
+            document.getElementById(
+                "minutesSpent"
+            ).value || 0
+        );
+
+
+
+    // -------------------------
+    // Start + End -> Minutes
+    // -------------------------
+
+    if (
+        start &&
+        end
+    ) {
+
+        const startDate =
+            new Date(
+                `2000-01-01T${start}`
+            );
+
+        const endDate =
+            new Date(
+                `2000-01-01T${end}`
+            );
+
+        document.getElementById(
+            "minutesSpent"
+        ).value = Math.round(
+            (endDate - startDate) / 60000
+        );
+
+        return;
+    }
+
+
+
+    // -------------------------
+    // Start + Minutes -> End
+    // -------------------------
+
+    if (
+        start &&
+        minutes > 0 &&
+        !end
+    ) {
+
+        const startDate =
+            new Date(
+                `2000-01-01T${start}`
+            );
+
+        startDate.setMinutes(
+            startDate.getMinutes() +
+            minutes
+        );
+
+        document.getElementById(
+            "endTime"
+        ).value =
+            startDate
+                .toTimeString()
+                .substring(0, 5);
+
+        return;
+    }
+
+
+
+    // -------------------------
+    // End + Minutes -> Start
+    // -------------------------
+
+    if (
+        end &&
+        minutes > 0 &&
+        !start
+    ) {
+
+        const endDate =
+            new Date(
+                `2000-01-01T${end}`
+            );
+
+        endDate.setMinutes(
+            endDate.getMinutes() -
+            minutes
+        );
+
+        document.getElementById(
+            "startTime"
+        ).value =
+            endDate
+                .toTimeString()
+                .substring(0, 5);
+
+    }
+
+}
+
+
+
+/* ==================================
+   v1.1bUI SEARCH CLEAR HELPER
+================================== */
+
+function resetActivitySearch() {
+
+    document.getElementById(
+        "activitySearch"
+    ).value = "";
+
+    filteredActivityData =
+        [...activityData];
+
+    populateActivityDropdown();
+}
+
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Escape"
+        ) {
+            closeModal(
+                "taskLogModal"
+            );
+        }
+
+        // 🚀 ENTER KEY SHORTCUT: Save task log form from keyboard
+        const modal = document.getElementById("taskLogModal");
+        if (modal && (modal.style.display === "flex" || modal.style.display === "block")) {
+            // Safe guards: Don't trigger save if typing in description OR looking up an activity
+            const activeId = document.activeElement.id;
+            if (event.key === "Enter" && activeId !== "taskDescription" && activeId !== "activitySearch") {
+                event.preventDefault();
+                saveTaskLog();
+            }
+        }
+    }
+);
