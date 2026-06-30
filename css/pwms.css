@@ -598,3 +598,27 @@ td:contains("Low") {
     .fab-btn { bottom: 16px; right: 16px; width: 48px; height: 48px; font-size: 1.4rem; }
     .fab-container { bottom: 16px; right: 16px; }
 }
+
+/* ==========================================================================
+   12. COGNITIVE FOCUS MODE OVERRIDES
+   ========================================================================== */
+.focus-mode-active .summary-horizontal-row,
+.focus-mode-active .dashboard-grid > .focus-section:first-child {
+    display: none !important; /* Hides the metrics panel and Milestone runway */
+}
+
+.focus-mode-active .dashboard-grid {
+    grid-template-columns: 1fr !important; /* Expands the Action Desk to full width */
+}
+
+.btn-focus {
+    background-color: transparent;
+    color: var(--secondary);
+    border: 1px solid var(--border);
+}
+
+.btn-focus.active {
+    background-color: #1e293b;
+    color: #ffffff;
+    border-color: #1e293b;
+}
