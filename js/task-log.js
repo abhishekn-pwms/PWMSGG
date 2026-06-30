@@ -1,4 +1,4 @@
-//Quicklog Fix from Desktop
+// FocusDash v1.0
 
 let taskLogData = [];
 

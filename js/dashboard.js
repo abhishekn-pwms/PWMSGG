@@ -1,3 +1,5 @@
+// FocusDash v1.0
+
 let dashboardMilestones = [];
 let dashboardTodos = [];
 let dashboardTaskLogs = [];
@@ -24,8 +26,6 @@ async function refreshFocusDashboard() {
         showError("Unable to refresh dashboard focus tracks.");
     }
 }
-
-
 
 
 
@@ -191,4 +191,24 @@ function quickLogToDo(todoId, todoText, activityId) {
     sessionStorage.setItem("QUICK_LOG_DESC", `Action Complete: ${todoText}`);
     sessionStorage.setItem("QUICK_LOG_ACTIVITY", activityId);
     window.location.href = "task-log.html?action=new";
+}
+
+
+// 🚀 NEW: Flips the dashboard display tree between wide planning and clean execution mode
+function toggleDashboardFocusMode() {
+    const bodyContainer = document.querySelector(".app-layout");
+    const btn = document.getElementById("focusToggleBtn");
+    
+    if (!bodyContainer || !btn) return;
+    
+    // Toggle the target active class states
+    const isActive = bodyContainer.classList.toggle("focus-mode-active");
+    
+    if (isActive) {
+        btn.classList.add("active");
+        btn.textContent = "👁️ Show All";
+    } else {
+        btn.classList.remove("active");
+        btn.textContent = "🎯 Focus Mode";
+    }
 }
