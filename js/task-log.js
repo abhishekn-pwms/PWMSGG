@@ -1,5 +1,5 @@
 
-//Version2
+//Version 2 Quicklog
 
 
 let taskLogData = [];
