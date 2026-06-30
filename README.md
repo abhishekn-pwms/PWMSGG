@@ -348,5 +348,5 @@ Production
 
 &#x20; GitHub Pages
 
-&#x20; Site URL = GitHub Pages URL 'https://abhishekn-pwms.github.io/PWMS2'
+&#x20; Site URL = GitHub Pages URL 'https://abhishekn-pwms.github.io/PWMSGG'
 
