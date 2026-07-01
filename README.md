@@ -1,4 +1,19 @@
 === === === === === ===
+Date : Wed, 01-Jul-2026
+=== === === === === ===
+
+Release PWMS GG v1.7 ENABLE RLS IN DB
+------------------
+
+What's New
+This release focuses entirely on Enabling Row Level Security across all tables in Supabase DB.
+
+** ROW-LEVEL SECURITY ENABLED FOR ALL TABLES
+* CREATED UNIVERSAL POLICIES FOR ALL TABLES
+* ACTIVATED ROW-LEVEL SECURITY WALLS (LOCKED THE BACKDOOR)
+
+
+=== === === === === ===
 Date : Tue, 30-Jun-2026
 === === === === === ===
 
